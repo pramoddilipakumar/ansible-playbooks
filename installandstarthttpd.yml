@@ -1,0 +1,12 @@
+
+- hosts: all
+  become: true
+  tasks:
+    - name: install httpd package
+      yum:
+        name: httpd
+        state: latest #updates the httpd with latest edition
+    - name: start httpd server
+      service:
+        name: httpd
+        state: started
