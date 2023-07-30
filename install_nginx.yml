@@ -1,0 +1,29 @@
+---
+- name: Install Nginx and Copy Configuration
+  hosts: your_target_hosts
+  become: true
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Install Nginx
+      yum:
+        name: nginx
+        state: present
+      when: ansible_pkg_mgr == 'yum'
+
+    - name: Copy Nginx configuration
+      copy:
+        src: /path/to/your/nginx.conf
+        dest: /etc/nginx/nginx.conf
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Reload Nginx
+      service:
+        name: nginx
+        state: reloaded
