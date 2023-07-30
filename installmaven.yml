@@ -1,0 +1,16 @@
+---
+- name: Install Maven
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Maven on APT-based systems
+      apt:
+        name: maven
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Install Maven on YUM-based systems
+      yum:
+        name: maven
+        state: present
+      when: ansible_pkg_mgr == 'yum'
