@@ -1,0 +1,13 @@
+---
+- name: Run Shell Script
+  hosts: all
+  become: true
+  tasks:
+    - name: Copy the shell script to the remote host
+      copy:
+        src: /path/to/your_script.sh #give the valid path
+        dest: /tmp/your_script.sh #give the valid dest path
+        mode: "0755" # Set the appropriate permissions on the script
+
+    - name: Run the shell script
+      script: /tmp/your_script.sh #give the valid command
