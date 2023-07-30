@@ -1,0 +1,16 @@
+---
+- name: Install Git
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Git on APT-based systems
+      apt:
+        name: git
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Install Git on YUM-based systems
+      yum:
+        name: git
+        state: present
+      when: ansible_pkg_mgr == 'yum'
