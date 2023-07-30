@@ -1,0 +1,16 @@
+---
+- name: Create Directory and File
+  hosts: all
+  become: true
+  tasks:
+    - name: Create the directory
+      file:
+        path: /home/ansible/sampledir
+        state: directory
+        mode: "0755"
+
+    - name: Create the file inside the directory
+      copy:
+        content: "This is the content of the file."
+        dest:/home/ansible/sampledir/hello.txt
+        mode: "0644"
