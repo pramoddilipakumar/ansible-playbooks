@@ -1,0 +1,21 @@
+---
+- name: Launch EC2 Instance
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: Create EC2 instance
+      ec2:
+        region: ap-south-1
+        instance_type: "t2.micro"
+        image: "ami-0c55b159cbfafe1f0" # Replace with the desired AMI ID for your region
+        key_name: "your_key_pair_name" #add the relevant key name
+        count: 1
+        vpc_subnet_id: "your_subnet_id" # your subnet id
+        assign_public_ip: yes
+        group_id: "your_security_group_id" #your SG id
+        wait: yes
+      register: ec2_instance
+
+    - name: Show instance information
+      debug:
+        var: ec2_instance.instances
