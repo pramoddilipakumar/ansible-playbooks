@@ -1,0 +1,15 @@
+---
+- name: Install and configure PostgreSQL database
+  hosts: db_servers
+  become: true
+  tasks:
+    - name: Install PostgreSQL
+      package:
+        name: postgresql
+        state: present
+
+    - name: Start PostgreSQL and enable it on boot
+      service:
+        name: postgresql
+        state: started
+        enabled: true
